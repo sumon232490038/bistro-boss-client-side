@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
+
 import { useState } from "react";
 import ItemsMenu from "../../Shared/ItemsMenu/ItemsMenu";
 
@@ -18,10 +18,6 @@ const PopulerMenu = () => {
   console.log(items);
   return (
     <section>
-      <SectionTitle
-        subHeading={"Cheack it Out"}
-        heading={"Form our menu"}
-      ></SectionTitle>
       <div className="grid md:grid-cols-2 gap-4 mb-10">
         {items.map((item) => (
           <ItemsMenu key={item._id} item={item}></ItemsMenu>
