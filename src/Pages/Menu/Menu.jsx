@@ -17,30 +17,6 @@ const Menu = () => {
         subHeading={`Don't miss`}
       ></SectionTitle>
       <PopulerMenu></PopulerMenu>
-      <Cover coverImg={coverImg} title="Our menu"></Cover>
-      <SectionTitle
-        heading={`today's offer`}
-        subHeading={`Don't miss`}
-      ></SectionTitle>
-      <PopulerMenu></PopulerMenu>
-      <Cover coverImg={coverImg} title="Our menu"></Cover>
-      <SectionTitle
-        heading={`today's offer`}
-        subHeading={`Don't miss`}
-      ></SectionTitle>
-      <PopulerMenu></PopulerMenu>
-      <Cover coverImg={coverImg} title="Our menu"></Cover>
-      <SectionTitle
-        heading={`today's offer`}
-        subHeading={`Don't miss`}
-      ></SectionTitle>
-      <PopulerMenu></PopulerMenu>
-      <Cover coverImg={coverImg} title="Our menu"></Cover>
-      <SectionTitle
-        heading={`today's offer`}
-        subHeading={`Don't miss`}
-      ></SectionTitle>
-      <PopulerMenu></PopulerMenu>
     </div>
   );
 };
