@@ -1,6 +1,24 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const NavBer = () => {
+  const { user, logOut } = useContext(AuthContext);
+  // console.log(user);
+  const handleLogOut = () => {
+    logOut()
+      .then((res) => {
+        Swal.fire({
+          title: "LogOut successfull!",
+          icon: "success",
+          draggable: true,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   const navOption = (
     <>
       {" "}
@@ -10,6 +28,19 @@ const NavBer = () => {
       <li>
         <Link to={"/menu"}>Menu</Link>
       </li>
+      <li>
+        <Link to={"/private"}>Card</Link>
+      </li>
+      <li>
+        <Link to={"/order/SALAD"}>Order Food</Link>
+      </li>
+      {user ? (
+        <button onClick={handleLogOut}>Log Out</button>
+      ) : (
+        <li>
+          <Link to={"/login"}>Login</Link>
+        </li>
+      )}
     </>
   );
 
@@ -35,7 +66,7 @@ const NavBer = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm text-white dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content bg-base-100 text-black rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
             {navOption}
           </ul>
@@ -43,7 +74,7 @@ const NavBer = () => {
         <a className="btn btn-ghost text-xl">Bistro boss</a>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 text-white">{navOption}</ul>
+        <ul className="menu menu-horizontal px-1 ">{navOption}</ul>
       </div>
       <div className="navbar-end">
         <a className="btn">Button</a>

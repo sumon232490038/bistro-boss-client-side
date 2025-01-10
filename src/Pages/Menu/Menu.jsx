@@ -52,7 +52,7 @@ const Menu = () => {
       <MenuCategory
         items={soups}
         coverImg={soupsImg}
-        title={"soup"}
+        title={"SOUPS"}
       ></MenuCategory>
     </div>
   );
