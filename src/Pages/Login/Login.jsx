@@ -12,6 +12,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import Swal from "sweetalert2";
+import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 
 const Login = () => {
   const { loginUser, setLoading } = useContext(AuthContext);
@@ -108,17 +109,21 @@ const Login = () => {
                 />
 
                 <div className="form-control mt-6"></div>
-                <button disabled={disable} className="btn btn-primary">
+                {/* TODO: use captcha for disable button */}
+                <button disabled={false} className="btn btn-primary">
                   Login
                 </button>
               </div>
             </form>
-            <h1 className="text-center -mt-5 mb-2">
-              New here?
-              <Link to={"/signup"} className="text-red-600">
-                Create a New Account
-              </Link>
-            </h1>
+            <div className="flex items-center justify-center flex-col mb-2">
+              <h1 className="text-center -mt-5 mb-2">
+                New here?
+                <Link to={"/signup"} className="text-red-600">
+                  Create a New Account
+                </Link>
+              </h1>
+              <SocialLogin></SocialLogin>
+            </div>
           </div>
         </div>
       </div>

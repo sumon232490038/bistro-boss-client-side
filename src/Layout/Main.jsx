@@ -6,7 +6,7 @@ const Main = () => {
   const location = useLocation();
   const noNavberAndFooter =
     location.pathname.includes("login") ||
-    location.pathname.includes("/signUp");
+    location.pathname.includes("/signup");
 
   return (
     <div>

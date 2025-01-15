@@ -3,8 +3,11 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 
 const SignUp = () => {
+  const axiosPublic = useAxiosPublic();
   const { createUser, setLoading, updateNewUser } = useContext(AuthContext);
   const {
     register,
@@ -15,16 +18,23 @@ const SignUp = () => {
   const Navigate = useNavigate();
 
   const onSubmit = (data) => {
-    // console.log(data);
     const name = data.name;
     const photoUrl = data.photoUrl;
     createUser(data.email, data.password)
       .then(() => {
         updateNewUser(name, photoUrl)
           .then(() => {
-            reset();
-            Swal.fire("User Create SuccessFull!");
-            Navigate("/");
+            const userInfo = {
+              name: data.name,
+              email: data.email,
+            };
+            axiosPublic.post("/users", userInfo).then((res) => {
+              if (res.data) {
+                reset();
+                Swal.fire("User Create SuccessFull!");
+                Navigate("/");
+              }
+            });
           })
           .catch((error) => {
             console.log(error);
@@ -119,12 +129,15 @@ const SignUp = () => {
                 <button className="btn btn-primary">Sign UP</button>
               </div>
             </form>
-            <h1 className="text-center -mt-5 mb-2">
-              Already registered?{" "}
-              <Link to={"/login"} className="text-red-600">
-                Go to log in
-              </Link>
-            </h1>
+            <div className="mb-2">
+              <h1 className="text-center -mt-5 mb-2">
+                Already registered?{" "}
+                <Link to={"/login"} className="text-red-600">
+                  Go to log in
+                </Link>
+              </h1>
+              <SocialLogin></SocialLogin>
+            </div>
           </div>
         </div>
       </div>

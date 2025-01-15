@@ -2,10 +2,13 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import Swal from "sweetalert2";
+import { FaCartShopping } from "react-icons/fa6";
+import useCart from "../../../Hooks/useCart";
 
 const NavBer = () => {
   const { user, logOut } = useContext(AuthContext);
-  // console.log(user);
+  const [cart] = useCart();
+
   const handleLogOut = () => {
     logOut()
       .then((res) => {
@@ -32,10 +35,20 @@ const NavBer = () => {
         <Link to={"/private"}>Card</Link>
       </li>
       <li>
+        <Link to={"/dashBoard"}>
+          <button className="btn">
+            <FaCartShopping />
+            <div className="badge badge-secondary">+{cart.length}</div>
+          </button>
+        </Link>
+      </li>
+      <li>
         <Link to={"/order/SALAD"}>Order Food</Link>
       </li>
       {user ? (
-        <button onClick={handleLogOut}>Log Out</button>
+        <button className="btn btn-ghost" onClick={handleLogOut}>
+          Log Out
+        </button>
       ) : (
         <li>
           <Link to={"/login"}>Login</Link>
@@ -74,7 +87,7 @@ const NavBer = () => {
         <a className="btn btn-ghost text-xl">Bistro boss</a>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 ">{navOption}</ul>
+        <ul className="menu menu-horizontal px-1 items-center">{navOption}</ul>
       </div>
       <div className="navbar-end">
         <a className="btn">Button</a>

@@ -17,7 +17,7 @@ const Reviews = () => {
       .then((data) => {
         setReviews(data);
       });
-  });
+  }, []);
   return (
     <section className="my-20 ">
       <SectionTitle
@@ -25,10 +25,13 @@ const Reviews = () => {
         subHeading={"Testimonials"}
       ></SectionTitle>
       <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
-        {reviews1.map((review) => (
+        {reviews1.map((review, idx) => (
           <>
-            <SwiperSlide key={review._id}>
-              <div className="flex flex-col items-center justify-center text-center px-10 space-y-10">
+            <SwiperSlide key={idx}>
+              <div
+                key={review._id}
+                className="flex flex-col items-center justify-center text-center px-10 space-y-10"
+              >
                 <Rating
                   style={{ maxWidth: 180 }}
                   value={review.rating}

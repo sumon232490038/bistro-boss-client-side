@@ -7,6 +7,14 @@ import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import PrivateCard from "../Pages/Shared/PrivateCard/PrivateCard";
+import DashBoard from "../Layout/DashBoard";
+import MyCart from "../Pages/DashBoard/MyCart/MyCart";
+import AllUser from "../Pages/DashBoard/AllUsers/AllUser";
+import AdminRoute from "./AdminRoute";
+import AddITems from "../Pages/DashBoard/AddITems/AddITems";
+import ManageItems from "../Pages/DashBoard/ManageItems/ManageItems";
+import UpdateItems from "../Pages/UpdateItems/UpdateItems";
+import axios from "axios";
 
 const router = createBrowserRouter([
   {
@@ -34,7 +42,7 @@ const router = createBrowserRouter([
         element: <Login></Login>,
       },
       {
-        path: "/signUp",
+        path: "/signup",
         element: <SignUp></SignUp>,
       },
       {
@@ -44,6 +52,52 @@ const router = createBrowserRouter([
             <PrivateCard></PrivateCard>
           </PrivateRoute>
         ),
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <DashBoard></DashBoard>,
+    children: [
+      // local user routes
+      {
+        path: "/dashboard/myCart",
+        element: <MyCart></MyCart>,
+      },
+      // admin user routes
+      {
+        path: "/dashboard/AllUser",
+        element: (
+          <AdminRoute>
+            <AllUser></AllUser>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/addItems",
+        element: (
+          <AdminRoute>
+            <AddITems></AddITems>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/manageItems",
+        element: (
+          <AdminRoute>
+            <ManageItems></ManageItems>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/updateItem/:id",
+        element: (
+          <AdminRoute>
+            <UpdateItems></UpdateItems>
+          </AdminRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/dashboard/updateItem/${params.id}`),
       },
     ],
   },
